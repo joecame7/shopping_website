@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container" style="margin-top: 50px;">
+    <div class="jumbotron">
+        <div class="container text-center">
+            <h1>The Book Store</h1>      
+            <p>Best Quality Books in Cardiff</p>
+        </div>
+    </div>
+
+    <div class="dropdown" style="margin-bottom: 20px;">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            Sort by <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li><a href="{{ url_for('galleryPage', sort_by='name') }}">Name</a></li>
+            <li><a href="{{ url_for('galleryPage', sort_by='price_low_to_high') }}">Price (Low to High)</a></li>
+            <li><a href="{{ url_for('galleryPage', sort_by='price_high_to_low') }}">Price (High to Low)</a></li>
+            <li><a href="{{ url_for('galleryPage', sort_by='environmental_impact_low_to_high') }}">Environmental Impact (Low to High)</a></li>
+            <li><a href="{{ url_for('galleryPage', sort_by='environmental_impact_high_to_low') }}">Environmental Impact (High to Low)</a></li>
+        </ul>
+    </div>
+
+    <div class="row">
+        {% for book in books %}
+        <div class="col-sm-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">{{ book.title }}</div>
+                <div class="panel-body">
+                    <a href="{{ url_for('singleProductPage', bookId=book.id) }}">
+                        <img src="{{ url_for('static', filename=book.cover) }}" class="img-responsive" style="width:100%; height:500px" alt="{{ book.title }}">
+                    </a>
+                </div>
+                <div class="panel-footer">
+                    <p><b>Price: </b>£{{ book.price }}</p>
+                    <p><b>Environmental Impact: </b>{{ book.environmental_impact }}/5</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

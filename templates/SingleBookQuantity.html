@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="content-container" style="padding-top: 50px; margin-left: 20px;">
+        <h1>{{ book.title }}</h1>
+        <img src="{{ url_for('static', filename=book.cover) }}" alt="{{ book.title }}" height="300" width="200"/>
+        <p style="margin-top: 10px;"><b>Price: £{{ book.price }}</b></p>
+        <p>{{ book.description }}</p>
+        <p>Amount of books added to the basket: {{ quantity }}</p>
+    </div>
+{% endblock %}
+
